@@ -40,6 +40,21 @@ router.post('/login', (req, res) => {
             .first()
             .then(user => {
                 if (user && bcrypt.compareSync(password, user.password)) {
+                    const role = 1;
+                    function signToken(user) {
+                        const payload = {
+                            username: user.username,
+                            role: role
+                        };
+
+                        const secret = process.env.JWT_SECRET || "This is the secret";
+
+                        const options = {
+                            expiresIn: "24h",
+                        };
+
+                        return jwt.sign(payload, secret, options);
+                    }
                     const token = signToken(user);
 
                     res.status(200).json({
@@ -59,6 +74,21 @@ router.post('/login', (req, res) => {
             .first()
             .then(user => {
                 if (user && bcrypt.compareSync(password, user.password)) {
+                    const role = 2;
+                    function signToken(user) {
+                        const payload = {
+                            username: user.username,
+                            role: role
+                        };
+
+                        const secret = process.env.JWT_SECRET || "This is the secret";
+
+                        const options = {
+                            expiresIn: "24h",
+                        };
+
+                        return jwt.sign(payload, secret, options);
+                    }
                     const token = signToken(user);
 
                     res.status(200).json({
@@ -75,19 +105,20 @@ router.post('/login', (req, res) => {
     }
 });
 
-function signToken(user) {
-    const payload = {
-        username: user.username
-    };
+// function signToken(user) {
+//     const payload = {
+//         username: user.username,
+//         role: role
+//     };
 
-    const secret = process.env.JWT_SECRET || "This is the secret";
+//     const secret = process.env.JWT_SECRET || "This is the secret";
 
-    const options = {
-        expiresIn: "24h",
-    };
+//     const options = {
+//         expiresIn: "24h",
+//     };
 
-    return jwt.sign(payload, secret, options);
-}
+//     return jwt.sign(payload, secret, options);
+// }
 
 // router.get('/logout', (req, res) => {
 //     if (req.session) {
