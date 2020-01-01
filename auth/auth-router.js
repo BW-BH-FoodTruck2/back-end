@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const router = require("express").Router();
+const jwt = require("jsonwebtoken");
 const Users = require('../users/users-model');
 
 router.post('/register', (req, res) => {
@@ -9,32 +10,84 @@ router.post('/register', (req, res) => {
 
     user.password = hash;
 
-    Users.add(user)
-        .then(saved => {
-            res.status(201).json(saved);
-        })
-        .catch(err => {
-            res.status(500).json(err);
-        })
+    if (user.role === 1) {
+        delete user["role"];
+        Users.addDiner(user)
+            .then(saved => {
+                res.status(201).json(saved);
+            })
+            .catch(err => {
+                res.status(500).json(err);
+            })
+    } else if (user.role === 2) {
+        delete user["role"];
+        Users.addOperator(user)
+            .then(saved => {
+                res.status(201).json(saved);
+            })
+            .catch(err => {
+                res.status(500).json(err);
+            })
+    }
+
 });
 
 router.post('/login', (req, res) => {
-    let { username, password } = req.body;
+    let { username, password, role } = req.body;
 
-    Users.getUsersBy({ username })
-        .first()
-        .then(user => {
-            if (user && bcrypt.compareSync(password, user.password)) {
-                // req.session.user = user;
-                res.status(200).json({ message: `Welcome ${user.username}!` });
-            } else {
-                res.status(401).json({ message: "Invalid credentials" });
-            }
-        })
-        .catch(err => {
-            res.status(500).json(err);
-        });
+    if (role === 1) {
+        Users.getDinersBy({ username })
+            .first()
+            .then(user => {
+                if (user && bcrypt.compareSync(password, user.password)) {
+                    const token = signToken(user);
+
+                    res.status(200).json({
+                        token,
+                        message: `Welcome ${user.username}!`
+                    });
+                } else {
+                    res.status(401).json({ message: "Invalid credentials" });
+                }
+            })
+            .catch(err => {
+                res.status(500).json(err);
+            });
+
+    } else if (role === 2) {
+        Users.getOperatorsBy({ username })
+            .first()
+            .then(user => {
+                if (user && bcrypt.compareSync(password, user.password)) {
+                    const token = signToken(user);
+
+                    res.status(200).json({
+                        token,
+                        message: `Welcome ${user.username}!`
+                    });
+                } else {
+                    res.status(401).json({ message: "Invalid credentials" });
+                }
+            })
+            .catch(err => {
+                res.status(500).json(err);
+            });
+    }
 });
+
+function signToken(user) {
+    const payload = {
+        username: user.username
+    };
+
+    const secret = process.env.JWT_SECRET || "This is the secret";
+
+    const options = {
+        expiresIn: "24h",
+    };
+
+    return jwt.sign(payload, secret, options);
+}
 
 // router.get('/logout', (req, res) => {
 //     if (req.session) {

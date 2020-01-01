@@ -25,7 +25,7 @@ function getDiners() {
 
 function getDinersBy(filter) {
     return db("diners")
-        .select("id", "username")
+        .select("id", "username", "password")
         .where(filter);
 }
 
@@ -52,7 +52,7 @@ function getOperators() {
 
 function getOperatorsBy(filter) {
     return db("operators")
-        .select("id", "username")
+        .select("id", "username", "password")
         .where(filter);
 }
 
