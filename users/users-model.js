@@ -1,33 +1,72 @@
 const db = require('../database/dbConfig.js');
 
 module.exports = {
-    add,
-    getUsers,
-    getUsersBy,
-    getUsersById,
+    addDiner,
+    getDiners,
+    getDinersBy,
+    getDinersById,
+    getOperators,
+    getOperatorsBy,
+    addOperator,
+    getAllUsers
 };
 
-function getUsers() {
-    return db("users").select("id", "username").orderBy("id");
+function getAllUsers() {
+    return db
+        .select("id", "username")
+        .from('diners', 'operators')
+        .orderBy("id");
 }
 
-function getUsersBy(filter) {
-    return db("users")
+// -------Diner DB Access methods -----//
+function getDiners() {
+    return db("diners").select("id", "username").orderBy("id");
+}
+
+function getDinersBy(filter) {
+    return db("diners")
         .select("id", "username")
         .where(filter);
 }
 
-function add(user) {
-    return db("users")
+function addDiner(user) {
+    return db("diners")
         .insert(user, "id")
         .then(ids => {
             const [id] = ids;
-            return getUsersById(id);
+            return getDinersById(id);
         });
 }
 
-function getUsersById(id) {
-    return db("users")
+function getDinersById(id) {
+    return db("diners")
+        .select("id", "username")
+        .where({ id })
+        .first();
+}
+
+// -------Operator DB Access methods -----//
+function getOperators() {
+    return db("operators").select("id", "username").orderBy("id");
+}
+
+function getOperatorsBy(filter) {
+    return db("operators")
+        .select("id", "username")
+        .where(filter);
+}
+
+function addOperator(user) {
+    return db("operators")
+        .insert(user, "id")
+        .then(ids => {
+            const [id] = ids;
+            return getOperatorsById(id);
+        });
+}
+
+function getOperatorsById(id) {
+    return db("operators")
         .select("id", "username")
         .where({ id })
         .first();

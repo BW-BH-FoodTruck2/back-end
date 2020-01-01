@@ -6,10 +6,4 @@ const usersRouter = require('../users/users-router.js');
 router.use('/auth', authRouter);
 router.use('/users', usersRouter);
 
-const projectName = 'food-truck-trackr';
-
-router.get('/', (req, res) => {
-    res.json({ message: `Project: ${projectName} is up and running!` })
-})
-
 module.exports = router;
