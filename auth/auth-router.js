@@ -40,11 +40,11 @@ router.post('/login', (req, res) => {
             .first()
             .then(user => {
                 if (user && bcrypt.compareSync(password, user.password)) {
-                    const role = 1;
+
                     function signToken(user) {
                         const payload = {
                             username: user.username,
-                            role: role
+                            role: 1
                         };
 
                         const secret = process.env.JWT_SECRET || "This is the secret";
@@ -74,11 +74,11 @@ router.post('/login', (req, res) => {
             .first()
             .then(user => {
                 if (user && bcrypt.compareSync(password, user.password)) {
-                    const role = 2;
+
                     function signToken(user) {
                         const payload = {
                             username: user.username,
-                            role: role
+                            role: 2
                         };
 
                         const secret = process.env.JWT_SECRET || "This is the secret";
