@@ -1,6 +1,9 @@
 # Environmental Variables
 .env
 
+# VS Code Settings
+.vscode
+
 # Mac cruft
 .DS_Store
 
