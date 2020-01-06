@@ -1,6 +1,7 @@
 # Food Truck Trackr API
 
-## Note: All objects will be in `JSON` format.
+- Note: All objects will be in `JSON` format.
+- The database schema design can be found here: https://dbdesigner.page.link/EE8GXSmFY2fwYpeq7
 
 # Authentication
 
