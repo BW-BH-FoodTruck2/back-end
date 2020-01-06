@@ -14,8 +14,10 @@ module.exports = {
 function getAllUsers() {
     return db
         .select("id", "username")
-        .from('diners', 'operators')
-        .orderBy("id");
+        .from('operators')
+        .innerJoin("diners")
+        .orderBy("id")
+
 }
 
 // -------Diner DB Access methods -----//
