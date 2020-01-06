@@ -1,3 +1,7 @@
+# Food Truck Trackr API
+
+## Note: All objects will be in `JSON` format.
+
 # Authentication
 
 ## Register
