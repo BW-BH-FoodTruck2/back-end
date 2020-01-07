@@ -3,7 +3,6 @@ const db = require('../database/dbConfig.js');
 module.exports = {
     add,
     getById,
-    update,
     remove
 };
 
@@ -16,24 +15,12 @@ function add(location) {
         });
 }
 
-// function get() {
-//     return db
-//         .select()
-//         .from("dinerFavoriteTrucks")
-//         .orderBy("id");
-// }
-
 function getById(id) {
     return db
         .select()
         .from("dinerFavoriteTrucks")
-        .where("dinerID", id);
-}
-
-function update(id, changes) {
-    return db('dinerFavoriteTrucks')
-        .where("truckID", id)
-        .update(changes);
+        .where("dinerID", id)
+        .orderBy("truckID");
 }
 
 function remove(id) {
