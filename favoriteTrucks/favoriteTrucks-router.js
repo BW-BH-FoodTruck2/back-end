@@ -12,10 +12,8 @@ router.post('/', (req, res) => {
 
             //checks the existing data in the table and only allows the favorite to be added if it doesn't already exist for the given user. The same truck can be favorited by multiple different users
             if (favoriteArray.some(favorite => favorite.truckID === testVal)) {
-                console.log("made it to the if")
                 res.status(401).json({ message: "This Truck was already added as a favorite" });
             } else {
-                console.log("made it to the else if")
                 favoriteTrucks.add(favorite)
                     .then(() => {
                         favoriteTrucks.getById(dinerID)
@@ -39,45 +37,20 @@ router.get('/:id', (req, res) => {
         })
 })
 
-router.put('/:id', (req, res) => {
-    let location = req.body;
-    let id = req.params.id;
+router.delete('/', (req, res) => {
+    let dinerID = req.body.dinerID;
+    let truckID = req.body.truckID;
 
-    favoriteTrucks.getById(id)
-        .then(existingLocation => {
-            if (existingLocation) {
-                favoriteTrucks.update(id, location)
+    favoriteTrucks.getById(dinerID)
+        .then(favoriteArray => {
+
+            if (favoriteArray.some(favorite => favorite.truckID === truckID)) {
+                favoriteTrucks.remove(truckID)
                     .then(() => {
-                        favoriteTrucks.getById(id)
-                            .then(updatedLocation => {
-                                res.status(201).json(updatedLocation)
-                            })
-                    })
-                    .catch(err => {
-                        res.status(500).json({ err, errorMessage: "unable to update the location" })
+                        res.status(201).json({ message: "Favorite deleted successfully" })
                     })
             } else {
-                res.status(404).json({ message: "the requested truck either doesn't exist, or doesn't have a location saved" })
-            }
-        })
-
-})
-
-router.delete('/:id', (req, res) => {
-    let id = req.params.id;
-
-    favoriteTrucks.getById(id)
-        .then(existingLocation => {
-            if (existingLocation) {
-                favoriteTrucks.remove(id)
-                    .then(() => {
-                        res.status(201).json({ message: "Location data deleted successfully" })
-                    })
-                    .catch(err => {
-                        res.status(500).json({ err, errorMessage: "unable to delete the location" })
-                    })
-            } else {
-                res.status(404).json({ message: "the requested truck either doesn't exist, or doesn't have a location saved" })
+                res.status(404).json({ message: "Favorite not found" })
             }
         })
 
