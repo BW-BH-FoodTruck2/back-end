@@ -230,3 +230,56 @@ example: `https://food-truck-trackr.herokuapp.com/api/truckratings/1` would retu
 
 ## Update & Delete
 There are not endpoints for update and delete as ratings are not currently tied to individual users. 
+
+# Menu Items
+
+## Create
+
+**POST** request to: 
+` https://food-truck-trackr.herokuapp.com/api/menuitems`
+
+with the body of:
+
+```javascript
+{
+    itemName: "string",
+    itemDescription: "string",
+    itemPrice: 10.00
+}
+```
+`itemName` and `itemPrice` are **REQUIRED**.
+
+`itemDescription` is **OPTIONAL**
+
+## Read
+
+For A list of all trucks  
+**GET** request to: 
+` https://food-truck-trackr.herokuapp.com/api/menuitems`
+
+For a single truck  
+**GET** request to:
+` https://food-truck-trackr.herokuapp.com/api/menuitems/id` (where `id` is the id of the item you want.)  
+example: `https://food-truck-trackr.herokuapp.com/api/menuitems/1` would get you the item with an id of `1`.
+
+## Update
+
+**PUT** request to: 
+` https://food-truck-trackr.herokuapp.com/api/menuitems/id` (where `id` is the id of the item you want.)
+
+with the body of:
+
+```javascript
+{
+    itemName: "string",
+    itemDescription: "string",
+    itemPrice: 10.00
+}
+```
+With the `PUT` request, you are allowed to pass just the key(s) you want to change, or you can pass the entire object again if you wish. This will work even if the key values you pass are the same as what's already in the database.
+
+## Delete
+
+**DELETE** request to:
+` https://food-truck-trackr.herokuapp.com/api/menuitems/id` (where `id` is the id of the item you want.)  
+example: `https://food-truck-trackr.herokuapp.com/api/menuitems/1` would delete the item with an id of `1`.
