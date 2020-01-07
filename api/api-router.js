@@ -7,6 +7,7 @@ const truckLocationRouter = require('../truckLocation/truckLocation-router.js');
 const favoriteTrucksRouter = require('../favoriteTrucks/favoriteTrucks-router.js');
 const truckRatings = require('../truckRatings/truckRating-router.js');
 const menuItems = require('../menuItems/menuItems-router.js');
+const truckMenuItems = require('../truckMenuItems/truckMenuItems-router.js');
 
 router.use('/auth', authRouter);
 router.use('/users', usersRouter);
@@ -15,5 +16,6 @@ router.use('/location', truckLocationRouter);
 router.use('/favoritetrucks', favoriteTrucksRouter);
 router.use('/truckratings', truckRatings);
 router.use('/menuitems', menuItems);
+router.use('/truckmenuitems', truckMenuItems);
 
 module.exports = router;
