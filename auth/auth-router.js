@@ -47,7 +47,7 @@ router.post('/login', (req, res) => {
                             role: 1
                         };
 
-                        const secret = process.env.JWT_SECRET || "This is the secret";
+                        const secret = process.env.JWT_SECRET;
 
                         const options = {
                             expiresIn: "24h",
@@ -81,7 +81,7 @@ router.post('/login', (req, res) => {
                             role: 2
                         };
 
-                        const secret = process.env.JWT_SECRET || "This is the secret";
+                        const secret = process.env.JWT_SECRET;
 
                         const options = {
                             expiresIn: "24h",

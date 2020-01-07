@@ -2,7 +2,7 @@ const router = require('express').Router();
 const restricted = require('../auth/restricted-middleware');
 const Trucks = require('./trucks-model');
 
-router.post('/', (req, res) => {
+router.post('/', restricted, (req, res) => {
     let truck = req.body;
     Trucks.add(truck)
         .then(saved => {
@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
         })
 })
 
-router.get('/', (req, res) => {
+router.get('/', restricted, (req, res) => {
     Trucks.get()
         .then(trucks => {
             res.status(200).json(trucks)
@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
         })
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', restricted, (req, res) => {
     let id = req.params.id;
 
     Trucks.getById(id)
@@ -35,7 +35,7 @@ router.get('/:id', (req, res) => {
         })
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', restricted, (req, res) => {
     let id = req.params.id;
     let changes = req.body;
 
@@ -51,7 +51,7 @@ router.put('/:id', (req, res) => {
         })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', restricted, (req, res) => {
     let id = req.params.id;
 
     Trucks.remove(id)
