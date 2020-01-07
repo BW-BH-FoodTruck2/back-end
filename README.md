@@ -229,7 +229,7 @@ with the body of:
 example: `https://food-truck-trackr.herokuapp.com/api/truckratings/1` would return the list of ratings for the truck with an id of `1`.
 
 ## Update & Delete
-There are not endpoints for update and delete as ratings are not currently tied to individual users. 
+There are not endpoints for update and delete as ratings are not tied to individual users. 
 
 # Menu Items
 
@@ -326,3 +326,29 @@ with the body of:
 }
 ```
 `truckID` and `menuItemID` are **REQUIRED**.
+
+# Menu Item Ratings 
+
+## Create
+
+**POST** request to: 
+` https://food-truck-trackr.herokuapp.com/api/menuitemratings`
+
+with the body of:
+
+```javascript
+{
+    menuItemID: 3,
+    rating: 5
+}
+```
+`menuItemID` and `rating` are **REQUIRED**.  
+`rating` can be an integer between 1-5.
+
+## Read
+**GET** request to:
+` https://food-truck-trackr.herokuapp.com/api/menuitemratings/id` (where `id` is the id of the menu item you want.)  
+example: `https://food-truck-trackr.herokuapp.com/api/menuitemratings/1` would return the list of ratings for the menu item with an id of `1`.
+
+## Update & Delete
+There are not endpoints for update and delete as ratings are not tied to individual users. 
