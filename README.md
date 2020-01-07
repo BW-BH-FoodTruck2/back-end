@@ -283,3 +283,46 @@ With the `PUT` request, you are allowed to pass just the key(s) you want to chan
 **DELETE** request to:
 ` https://food-truck-trackr.herokuapp.com/api/menuitems/id` (where `id` is the id of the item you want.)  
 example: `https://food-truck-trackr.herokuapp.com/api/menuitems/1` would delete the item with an id of `1`.
+
+# Truck Menu Items
+This table exists to link the menu items with the trucks. It is just a list of truck IDs and menuItem IDs that correspond to their respective IDs on their own tables.
+
+## Create
+
+**POST** request to: 
+` https://food-truck-trackr.herokuapp.com/api/truckmenuitems`
+
+with the body of:
+
+```javascript
+{
+    truckID: 2,
+    menuItemID: 3
+}
+```
+`truckID` and `menuItemID` are **REQUIRED**.
+
+## Read
+
+**GET** request to:
+` https://food-truck-trackr.herokuapp.com/api/truckmenuitems/id` (where `id` is the id of the truck you want.)  
+example: `https://food-truck-trackr.herokuapp.com/api/truckmenuitems/1` would return the list of menu Items for the truck with an id of `1`.
+
+## Update
+
+There is no update endpoint because it was unnecessary.
+
+## Delete
+
+**DELETE** request to:
+`https://food-truck-trackr.herokuapp.com/api/truckmenuitems`
+
+with the body of:
+
+```javascript
+{
+    truckID: 2,
+    menuItemID: 3
+}
+```
+`truckID` and `menuItemID` are **REQUIRED**.
