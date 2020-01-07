@@ -16,13 +16,6 @@ function add(location) {
         });
 }
 
-// function get() {
-//     return db
-//         .select()
-//         .from("currentTruckLocation")
-//         .orderBy("id");
-// }
-
 function getById(id) {
     return db
         .select()

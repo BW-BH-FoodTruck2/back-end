@@ -204,3 +204,29 @@ with the body of:
 }
 ```
 `dinerID` and `truckID` are **REQUIRED**.
+
+# Truck Ratings 
+
+## Create
+
+**POST** request to: 
+` https://food-truck-trackr.herokuapp.com/api/truckratings`
+
+with the body of:
+
+```javascript
+{
+    truckID: 3,
+    rating: 5
+}
+```
+`truckID` and `rating` are **REQUIRED**.  
+`rating` can be an integer between 1-5.
+
+## Read
+**GET** request to:
+` https://food-truck-trackr.herokuapp.com/api/truckratings/id` (where `id` is the id of the truck you want.)  
+example: `https://food-truck-trackr.herokuapp.com/api/truckratings/1` would return the list of ratings for the truck with an id of `1`.
+
+## Update & Delete
+There are not endpoints for update and delete as ratings are not currently tied to individual users. 
