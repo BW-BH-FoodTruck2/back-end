@@ -8,6 +8,7 @@ const favoriteTrucksRouter = require('../favoriteTrucks/favoriteTrucks-router.js
 const truckRatings = require('../truckRatings/truckRating-router.js');
 const menuItems = require('../menuItems/menuItems-router.js');
 const truckMenuItems = require('../truckMenuItems/truckMenuItems-router.js');
+const menuItemRatings = require('../menuItemRatings/menuItemRating-router.js');
 
 router.use('/auth', authRouter);
 router.use('/users', usersRouter);
@@ -17,5 +18,6 @@ router.use('/favoritetrucks', favoriteTrucksRouter);
 router.use('/truckratings', truckRatings);
 router.use('/menuitems', menuItems);
 router.use('/truckmenuitems', truckMenuItems);
+router.use('/menuitemratings', menuItemRatings);
 
 module.exports = router;
