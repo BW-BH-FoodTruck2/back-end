@@ -2,7 +2,7 @@ const router = require('express').Router();
 const restricted = require('../auth/restricted-middleware');
 const truckMenuItems = require('./truckMenuItems-model');
 
-router.post('/', (req, res) => {
+router.post('/', restricted, (req, res) => {
     let menuItem = req.body;
     let truckID = req.body.truckID;
 
@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
         })
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', restricted, (req, res) => {
     let id = req.params.id;
 
     truckMenuItems.getById(id)
@@ -40,7 +40,7 @@ router.get('/:id', (req, res) => {
         })
 })
 
-router.delete('/', (req, res) => {
+router.delete('/', restricted, (req, res) => {
     let truckID = req.body.truckID;
     let menuItemID = req.body.menuItemID;
 

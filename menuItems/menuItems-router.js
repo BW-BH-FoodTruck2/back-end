@@ -2,7 +2,7 @@ const router = require('express').Router();
 const restricted = require('../auth/restricted-middleware');
 const menuItems = require('./menuItems-model');
 
-router.post('/', (req, res) => {
+router.post('/', restricted, (req, res) => {
     let item = req.body;
 
     menuItems.add(item)
@@ -14,7 +14,7 @@ router.post('/', (req, res) => {
         })
 })
 
-router.get('/', (req, res) => {
+router.get('/', restricted, (req, res) => {
     menuItems.get()
         .then(menuItems => {
             res.status(200).json(menuItems)
@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
         })
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', restricted, (req, res) => {
     let id = req.params.id;
 
     menuItems.getById(id)
@@ -40,7 +40,7 @@ router.get('/:id', (req, res) => {
         })
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', restricted, (req, res) => {
     let id = req.params.id;
     let changes = req.body;
 
@@ -56,7 +56,7 @@ router.put('/:id', (req, res) => {
         })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', restricted, (req, res) => {
     let id = req.params.id;
 
     menuItems.getById(id)

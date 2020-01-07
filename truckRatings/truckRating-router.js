@@ -2,7 +2,7 @@ const router = require('express').Router();
 const restricted = require('../auth/restricted-middleware');
 const truckRatings = require('./truckRating-model');
 
-router.post('/', (req, res) => {
+router.post('/', restricted, (req, res) => {
     let body = req.body;
     let rating = req.body.rating;
 
@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
 
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', restricted, (req, res) => {
     let id = req.params.id;
 
     truckRatings.getById(id)

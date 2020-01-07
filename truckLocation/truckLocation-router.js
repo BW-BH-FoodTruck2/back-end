@@ -2,7 +2,7 @@ const router = require('express').Router();
 const restricted = require('../auth/restricted-middleware');
 const TruckLocation = require('./truckLocation-model');
 
-router.post('/', (req, res) => {
+router.post('/', restricted, (req, res) => {
     let location = req.body;
     let id = req.body.truckID;
 
@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
 
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', restricted, (req, res) => {
     let id = req.params.id;
 
     TruckLocation.getById(id)
@@ -35,7 +35,7 @@ router.get('/:id', (req, res) => {
         })
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', restricted, (req, res) => {
     let location = req.body;
     let id = req.params.id;
 
@@ -59,7 +59,7 @@ router.put('/:id', (req, res) => {
 
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', restricted, (req, res) => {
     let id = req.params.id;
 
     TruckLocation.getById(id)
