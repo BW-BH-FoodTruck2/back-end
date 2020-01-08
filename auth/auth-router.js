@@ -59,6 +59,7 @@ router.post('/login', (req, res) => {
 
                     res.status(200).json({
                         token,
+                        id: user.id,
                         message: `Welcome ${user.username}!`
                     });
                 } else {
@@ -93,6 +94,7 @@ router.post('/login', (req, res) => {
 
                     res.status(200).json({
                         token,
+                        id: user.id,
                         message: `Welcome ${user.username}!`
                     });
                 } else {
