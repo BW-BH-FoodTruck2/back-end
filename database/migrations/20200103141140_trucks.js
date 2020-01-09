@@ -85,5 +85,10 @@ exports.up = function (knex) {
 
 exports.down = function (knex) {
     return knex.schema
+        .dropTableIfExists("currentTruckLocation")
+        .dropTableIfExists("truckRatings")
+        .dropTableIfExists("menuItems")
+        .dropTableIfExists("truckMenuItems")
+        .dropTableIfExists("menuItemRatings")
         .dropTableIfExists("trucks")
 };

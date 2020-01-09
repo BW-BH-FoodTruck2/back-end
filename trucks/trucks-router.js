@@ -4,13 +4,22 @@ const Trucks = require('./trucks-model');
 
 router.post('/', restricted, (req, res) => {
     let truck = req.body;
-    Trucks.add(truck)
-        .then(saved => {
-            res.status(201).json(saved);
+
+    Trucks.get()
+        .then(trucks => {
+            if (trucks.some(aTruck => aTruck.truckName === truck.truckName)) {
+                res.status(401).json({ message: "This truck name already exists" });
+            } else {
+                Trucks.add(truck)
+                    .then(saved => {
+                        res.status(201).json(saved);
+                    })
+                    .catch(err => {
+                        res.status(500).json({ err, errorMessage: "unable to add the truck" })
+                    })
+            }
         })
-        .catch(err => {
-            res.status(500).json({ err, errorMessage: "unable to add the truck" })
-        })
+
 })
 
 router.get('/', restricted, (req, res) => {
@@ -39,28 +48,44 @@ router.put('/:id', restricted, (req, res) => {
     let id = req.params.id;
     let changes = req.body;
 
-    Trucks.update(id, changes)
-        .then(() => {
-            Trucks.getById(id)
-                .then(truck => {
-                    res.status(200).json(truck)
-                })
+    Trucks.getById(id)
+        .then(truck => {
+            if (truck) {
+                Trucks.update(id, changes)
+                    .then(() => {
+                        Trucks.getById(id)
+                            .then(truck => {
+                                res.status(200).json(truck)
+                            })
+                    })
+                    .catch(err => {
+                        res.status(500).json({ err, errorMessage: "unable to update the truck" })
+                    })
+            } else {
+                res.status(404).json({ message: "There is no truck by that ID." })
+            }
         })
-        .catch(err => {
-            res.status(500).json({ err, errorMessage: "unable to update the truck" })
-        })
+
 })
 
 router.delete('/:id', restricted, (req, res) => {
     let id = req.params.id;
 
-    Trucks.remove(id)
-        .then(() => {
-            res.status(201).json({ message: "Successfully deleted truck" })
+    Trucks.getById(id)
+        .then(truck => {
+            if (truck) {
+                Trucks.remove(id)
+                    .then(() => {
+                        res.status(201).json({ message: "Successfully deleted truck" })
+                    })
+                    .catch(err => {
+                        res.status(500).json({ err, errorMessage: "unable to delete the truck" })
+                    })
+            } else {
+                res.status(404).json({ message: "There is no truck by that ID. It either doesn't exist or was already deleted" })
+            }
         })
-        .catch(err => {
-            res.status(500).json({ err, errorMessage: "unable to delete the truck" })
-        })
+
 })
 
 module.exports = router;
