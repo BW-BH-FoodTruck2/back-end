@@ -224,9 +224,17 @@ with the body of:
 `rating` can be an integer between 1-5.
 
 ## Read
+
+To retrieve an array of all ratings for **a single truck**:
+  
 **GET** request to:
 ` https://food-truck-trackr.herokuapp.com/api/truckratings/id` (where `id` is the id of the truck you want.)  
 example: `https://food-truck-trackr.herokuapp.com/api/truckratings/1` would return the list of ratings for the truck with an id of `1`.
+
+To retrieve an array of all ratings for **all trucks truck**:
+
+**GET** request to:
+` https://food-truck-trackr.herokuapp.com/api/truckratings`
 
 ## Update & Delete
 There are not endpoints for update and delete as ratings are not tied to individual users. 
