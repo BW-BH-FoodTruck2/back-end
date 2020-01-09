@@ -27,7 +27,7 @@ exports.up = function (knex) {
             table.foreign("truckID")
                 .references("trucks.id");
 
-            table.string("location", 256)
+            table.string("location", 512)
                 .notNullable();
 
             table.dateTime("departureTime")

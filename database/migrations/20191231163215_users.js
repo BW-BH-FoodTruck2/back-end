@@ -10,7 +10,7 @@ exports.up = function (knex) {
 
             diners.string("password", 128).notNullable();
 
-            diners.string("location", 256);
+            diners.string("location", 512);
         })
         .createTable("operators", operators => {
             operators.increments();
