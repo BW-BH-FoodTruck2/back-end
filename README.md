@@ -261,11 +261,11 @@ with the body of:
 
 ## Read
 
-For A list of all trucks  
+For A list of all menu items:  
 **GET** request to: 
 ` https://food-truck-trackr.herokuapp.com/api/menuitems`
 
-For a single truck  
+For a single menu item:  
 **GET** request to:
 ` https://food-truck-trackr.herokuapp.com/api/menuitems/id` (where `id` is the id of the item you want.)  
 example: `https://food-truck-trackr.herokuapp.com/api/menuitems/1` would get you the item with an id of `1`.
