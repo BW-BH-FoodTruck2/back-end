@@ -45,35 +45,21 @@ describe('server.js', function () {
                     expect(res.body.message).toBe("Please login and try again");
                 });
         })
-        it('should delete the selected user', function () {
-            return request(server)
-                .post('/api/auth/register')
-                .send({ username: "test", password: "123" })
-                .then(res => {
-                    const id = res.body.id;
-                    return request(server)
-                        .delete(`/api/users/${id}`)
-                        .then(res => {
-                            expect(res.status).toBe(200);
-                            expect(res.body.message).toBe("user deleted successfully")
-                        })
-                });
-        })
 
-        it.skip("auth example", function () {
+        it("should reject an incorrect password", function () {
             return request(server)
                 .post("/api/auth/login")
-                .send({ username: "zac", password: "123" })
+                .send({ username: "testDiner", password: "wrong", role: 1 })
                 .then(res => {
-                    const token = res.body.token;
-                    console.log("token", res.body.token)
-                    return request(server)
-                        .get("/api/users")
-                        .set("authorization", token)
-                        .then(res => {
-                            expect(res.status).toBe(200);
-                            expect(Array.isArray(res.body)).toBe(true);
-                        });
+                    expect(res.status).toBe(401);
+                    expect(res.body.message).toBe("Invalid credentials")
+                    // return request(server)
+                    //     .get("/api/users")
+                    //     .set("authorization", token)
+                    //     .then(res => {
+                    //         expect(res.status).toBe(200);
+                    //         expect(Array.isArray(res.body)).toBe(true);
+                    //     });
                 });
         });
     });

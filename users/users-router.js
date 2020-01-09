@@ -16,4 +16,6 @@ router.get('/', restricted, (req, res) => {
         .catch(err => res.send(err));
 });
 
+router.get('/:id', restricted)
+
 module.exports = router;
