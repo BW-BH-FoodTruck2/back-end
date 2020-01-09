@@ -34,4 +34,18 @@ router.get('/:id', restricted, (req, res) => {
         })
 })
 
+router.get('/', restricted, (req, res) => {
+    truckRatings.getAll()
+        .then(ratings => {
+            if (ratings.length > 0) {
+                res.status(201).json(ratings)
+            } else {
+                res.status(404).json({ message: "There are no ratings" })
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ err, errorMessage: "unable to get the rating(s)" })
+        })
+})
+
 module.exports = router;

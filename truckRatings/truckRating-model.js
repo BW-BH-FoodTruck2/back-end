@@ -2,7 +2,8 @@ const db = require('../database/dbConfig.js');
 
 module.exports = {
     add,
-    getById
+    getById,
+    getAll
 };
 
 function add(rating) {
@@ -20,6 +21,13 @@ function getById(id) {
         .from("truckRatings")
         .where("truckID", id)
         .orderBy("rating");
+}
+
+function getAll() {
+    return db
+        .select()
+        .from("truckRatings")
+        .orderBy("truckID");
 }
 
 // function update(id, changes) {
